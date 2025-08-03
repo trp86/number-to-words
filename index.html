@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Number to Words Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --secondary: #666;
+      --input-bg: #f9f9f9;
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+      --accent: #4a90e2;
+      --border: #ddd;
+      --tooltip-bg: #333;
+      --tooltip-text: #fff;
+    }
+    [data-theme="dark"] {
+      --bg: #1e1e1e;
+      --text: #eeeeee;
+      --secondary: #aaa;
+      --input-bg: #2c2c2c;
+      --button-bg: #0066cc;
+      --button-text: #ffffff;
+      --accent: #4a90e2;
+      --border: #444;
+      --tooltip-bg: #ddd;
+      --tooltip-text: #111;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .button-group button {
+      margin-right: 0.5rem;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 0.3rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .button-group button:hover {
+      background-color: #0056b3;
+    }
+    .output-box {
+      margin-top: 2rem;
+    }
+    .output {
+      background-color: var(--input-bg);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .copy-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text);
+    }
+    .tooltip {
+      position: absolute;
+      top: -1.5rem;
+      right: 0;
+      font-size: 0.8rem;
+      background-color: var(--tooltip-bg);
+      color: var(--tooltip-text);
+      padding: 3px 6px;
+      border-radius: 4px;
+      display: none;
+    }
+    .info-text {
+      margin-top: 1rem;
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+    footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--text);
+  background-color: var(--input-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+}
+
+.footer-links a:hover {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  transform: translateY(-1px);
+}
+.footer-links svg {
+  height: 18px;
+  width: 18px;
+}
+
+    @media (max-width: 600px) {
+      .output {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Number to Words</h1>
+    <div class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</div>
+  </header>
+  <main>
+    <h2>Convert large numbers into readable words in multiple languages</h2>
+    <input type="text" id="numberInput" placeholder="Enter a number, e.g. 547000" oninput="validateInput(this)" />
+    <div class="button-group">
+      <button onclick="convertNumber()">Convert</button>
+      <button onclick="clearAll()">Clear</button>
+    </div>
+    <div class="info-text">Examples: 1000, 250000, 7654321</div>
+    <div id="approxValue" class="tooltip" style="margin-top: 1rem;"></div>
+    <div id="outputContainer" class="output-box"></div>
+  </main>
+  <footer>
+  <div class="footer-links">
+    <a href="mailto:trp86@gmail.com" title="Send us an email">
+      ✉️ Contact Us
+    </a>
+    <a href="https://www.buymeacoffee.com/yourcustomlink" target="_blank" title="Support us on Buy Me a Coffee">
+      <svg viewBox="0 0 512 512" fill="currentColor">
+        <path d="M411.14,246.15c25.52,0,46.26-20.75,46.26-46.26v-54.25c0-8.37-6.78-15.15-15.15-15.15h-40.93
+        c-4.27-21.06-15.35-40.14-31.23-54.22C351.2,57.64,325.91,48,299.19,48H106.93c-8.37,0-15.15,6.78-15.15,15.15v136.73
+        c0,25.52,20.75,46.26,46.26,46.26h18.91c1.89,39.09,20.7,74.44,49.9,97.34c-12.63,10.68-27.91,19.61-45.52,26.13
+        c-7.26,2.68-11.02,10.68-8.34,17.94c2.13,5.76,7.59,9.33,13.45,9.33c1.65,0,3.31-0.28,4.92-0.87c22.91-8.44,42.79-20.52,59.07-35.68
+        c16.28,15.16,36.16,27.24,59.07,35.68c1.61,0.59,3.27,0.87,4.92,0.87c5.86,0,11.32-3.57,13.45-9.33c2.68-7.26-1.08-15.26-8.34-17.94
+        c-17.61-6.52-32.89-15.45-45.52-26.13c29.2-22.9,48.01-58.25,49.9-97.34H411.14z M427.11,152.05v47.84
+        c0,8.83-7.18,16.01-16.01,16.01h-32.15c0.03-1.34,0.05-2.67,0.05-4.02v-59.84h32.09C419.93,152.05,427.11,159.23,427.11,152.05z"/>
+      </svg>
+      Buy Me a Coffee
+    </a>
+  </div>
+</footer>
+
+
+  <script>
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function validateInput(input) {
+      input.value = input.value.replace(/[^\d]/g, '');
+      updateApprox(input.value);
+    }
+
+    function updateApprox(val) {
+      const n = parseInt(val);
+      let approx = '';
+      if (!isNaN(n)) {
+        approx = new Intl.NumberFormat('en-US', {
+          notation: "compact",
+          compactDisplay: "short"
+        }).format(n);
+        approx = `Approx: ${approx}`;
+      }
+      document.getElementById('approxValue').innerText = approx;
+    }
+
+    function convertNumber() {
+      const val = document.getElementById('numberInput').value;
+      const num = parseInt(val);
+      if (isNaN(num)) return;
+
+      const outputContainer = document.getElementById('outputContainer');
+      outputContainer.innerHTML = '';
+
+      const outputs = [
+        { label: 'Short Form', value: getShortForm(num) },
+        { label: 'English (Full)', value: toEnglishWords(num) },
+        { label: 'German', value: 'Kommt bald...' },
+        { label: 'Hindi', value: 'जल्द आ रहा है...' },
+        { label: 'Odia', value: 'ଶୀଘ୍ର ଆସୁଛି...' }
+      ];
+
+      outputs.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'output';
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.innerText = 'Copied!';
+        div.innerHTML = `<span><strong>${item.label}:</strong> ${item.value}</span>`;
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/></svg>`;
+        btn.onclick = () => {
+          navigator.clipboard.writeText(item.value);
+          tooltip.style.display = 'block';
+          setTimeout(() => tooltip.style.display = 'none', 1500);
+        };
+        div.appendChild(btn);
+        div.appendChild(tooltip);
+        outputContainer.appendChild(div);
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('numberInput').value = '';
+      document.getElementById('outputContainer').innerHTML = '';
+      document.getElementById('approxValue').innerText = '';
+    }
+
+    function getShortForm(n) {
+      return new Intl.NumberFormat('en-US', {
+        notation: "compact",
+        compactDisplay: "short"
+      }).format(n);
+    }
+
+    function toEnglishWords(num) {
+      const a = ["","one","two","three","four","five","six","seven","eight","nine","ten",
+        "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+      const b = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+
+      if (num === 0) return 'zero';
+
+      const convert = (n) => {
+        if (n < 20) return a[n];
+        if (n < 100) return b[Math.floor(n/10)] + (n%10 ? "-" + a[n%10] : "");
+        if (n < 1000) return a[Math.floor(n/100)] + " hundred" + (n%100 ? " " + convert(n%100) : "");
+        if (n < 1e6) return convert(Math.floor(n/1000)) + " thousand" + (n%1000 ? " " + convert(n%1000) : "");
+        if (n < 1e9) return convert(Math.floor(n/1e6)) + " million" + (n%1e6 ? " " + convert(n%1e6) : "");
+        return convert(Math.floor(n/1e9)) + " billion" + (n%1e9 ? " " + convert(n%1e9) : "");
+      };
+
+      return convert(num).replace(/\b\w/g, c => c.toUpperCase());
+    }
+  </script>
+</body>
+</html>
