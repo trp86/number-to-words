@@ -79,19 +79,38 @@
       border-radius: 0.5rem;
       margin-bottom: 1rem;
     }
+    .button-group {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+    
     .button-group button {
-      margin-right: 0.5rem;
-      padding: 0.7rem 1.2rem;
+      padding: 0.9rem 1.4rem;
       font-size: 1rem;
+      font-weight: 500;
       background-color: var(--button-bg);
       color: var(--button-text);
       border: none;
-      border-radius: 0.3rem;
+      border-radius: 0.5rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
     }
+    
     .button-group button:hover {
       background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .button-group button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
     .output-box {
       margin-top: 2rem;
@@ -134,42 +153,154 @@
       color: var(--secondary);
       font-size: 0.95rem;
     }
+    
+    .language-selector {
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    
+    .language-selector label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .language-selector select {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: var(--input-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      background-image: linear-gradient(to bottom, var(--input-bg), var(--input-bg));
+    }
+    
+    .language-selector::after {
+      content: '';
+      position: absolute;
+      right: 1rem;
+      top: calc(50% + 0.5rem);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid var(--accent);
+      pointer-events: none;
+      transition: transform 0.3s ease;
+    }
+    
+    .language-selector:hover::after {
+      transform: translateY(2px);
+    }
+    
+    .language-selector select:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .language-selector select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+    }
+    
+    .language-selector option {
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    /* Improve dropdown appearance in Firefox */
+    @-moz-document url-prefix() {
+      .language-selector select {
+        background-color: var(--input-bg);
+        color: var(--text);
+      }
+    }
+    
+    /* Improve dropdown appearance in Chrome */
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      .language-selector select {
+        background-color: var(--input-bg);
+      }
+    }
+    
+    .language-flag {
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
     footer {
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
   border-top: 1px solid var(--border);
+  background-color: var(--input-bg);
+  margin-top: 2rem;
 }
 
 footer .footer-links {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-links a {
   text-decoration: none;
   font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text);
-  background-color: var(--input-bg);
-  padding: 0.5rem 1rem;
-  border-radius: 0.4rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: var(--bg);
+  padding: 0.7rem 1.2rem;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.6rem;
   border: 1px solid var(--border);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .footer-links a:hover {
   background-color: var(--button-bg);
   color: var(--button-text);
-  transform: translateY(-1px);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
+
 .footer-links svg {
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
+}
+
+.footer-links .coffee-btn {
+  background-color: #FFDD00;
+  color: #000000;
+  border-color: #FFDD00;
+}
+
+.footer-links .coffee-btn:hover {
+  background-color: #FFCC00;
+  border-color: #FFCC00;
+  color: #000000;
 }
 
     @media (max-width: 600px) {
@@ -187,11 +318,22 @@ footer .footer-links {
   </header>
   <main>
     <h2>Convert large numbers into readable words in multiple languages</h2>
-    <input type="text" id="numberInput" placeholder="Enter a number, e.g. 547000" oninput="validateInput(this)" />
-    <div class="button-group">
-      <button onclick="convertNumber()">Convert</button>
-      <button onclick="clearAll()">Clear</button>
+    <input type="text" id="numberInput" placeholder="Enter a number, e.g. 547000" oninput="validateInput(this)" aria-label="Enter a number" />
+    
+    <div class="language-selector">
+      <label for="languageSelect">Select Output Language</label>
+      <select id="languageSelect" aria-label="Select language">
+        <!-- Languages will be populated from API -->
+        <option value="" disabled selected>Loading languages...</option>
+      </select>
     </div>
+    
+    <div class="button-group">
+      <button onclick="convertNumber()" id="convertBtn">Convert</button>
+      <button onclick="clearAll()">Clear</button>
+      <button onclick="speakText()" id="speakBtn">🔊 Speak</button>
+    </div>
+    
     <div class="info-text">Examples: 1000, 250000, 7654321</div>
     <div id="approxValue" class="tooltip" style="margin-top: 1rem;"></div>
     <div id="outputContainer" class="output-box"></div>
@@ -199,17 +341,15 @@ footer .footer-links {
   <footer>
   <div class="footer-links">
     <a href="mailto:trp86@gmail.com" title="Send us an email">
-      ✉️ Contact Us
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      Contact Us
     </a>
-    <a href="https://www.buymeacoffee.com/yourcustomlink" target="_blank" title="Support us on Buy Me a Coffee">
-      <svg viewBox="0 0 512 512" fill="currentColor">
-        <path d="M411.14,246.15c25.52,0,46.26-20.75,46.26-46.26v-54.25c0-8.37-6.78-15.15-15.15-15.15h-40.93
-        c-4.27-21.06-15.35-40.14-31.23-54.22C351.2,57.64,325.91,48,299.19,48H106.93c-8.37,0-15.15,6.78-15.15,15.15v136.73
-        c0,25.52,20.75,46.26,46.26,46.26h18.91c1.89,39.09,20.7,74.44,49.9,97.34c-12.63,10.68-27.91,19.61-45.52,26.13
-        c-7.26,2.68-11.02,10.68-8.34,17.94c2.13,5.76,7.59,9.33,13.45,9.33c1.65,0,3.31-0.28,4.92-0.87c22.91-8.44,42.79-20.52,59.07-35.68
-        c16.28,15.16,36.16,27.24,59.07,35.68c1.61,0.59,3.27,0.87,4.92,0.87c5.86,0,11.32-3.57,13.45-9.33c2.68-7.26-1.08-15.26-8.34-17.94
-        c-17.61-6.52-32.89-15.45-45.52-26.13c29.2-22.9,48.01-58.25,49.9-97.34H411.14z M427.11,152.05v47.84
-        c0,8.83-7.18,16.01-16.01,16.01h-32.15c0.03-1.34,0.05-2.67,0.05-4.02v-59.84h32.09C419.93,152.05,427.11,159.23,427.11,152.05z"/>
+    <a href="https://www.buymeacoffee.com/trp86" target="_blank" rel="noopener noreferrer" title="Support us on Buy Me a Coffee" class="coffee-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+        <path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/>
       </svg>
       Buy Me a Coffee
     </a>
@@ -221,6 +361,26 @@ footer .footer-links {
     window.onload = () => {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      // Add keyboard support for theme toggle
+      const themeToggle = document.querySelector('.theme-toggle');
+      themeToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleTheme();
+        }
+      });
+      
+      // Add Enter key support for input field
+      document.getElementById('numberInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          convertNumber();
+        }
+      });
+      
+      // Fetch supported languages from API and populate dropdown
+      fetchSupportedLanguages();
     }
 
     function toggleTheme() {
@@ -231,90 +391,304 @@ footer .footer-links {
     }
 
     function validateInput(input) {
-      input.value = input.value.replace(/[^\d]/g, '');
-      updateApprox(input.value);
+      // Get the current locale
+      const locale = getLocaleForLanguage();
+      
+      // Get the decimal separator for the current locale
+      const numberFormat = new Intl.NumberFormat(locale);
+      const parts = numberFormat.formatToParts(1234.5);
+      const decimalSeparator = parts.find(part => part.type === 'decimal')?.value || '.';
+      const groupSeparator = parts.find(part => part.type === 'group')?.value || ',';
+      
+      // Create a regex that allows only digits and the appropriate separators
+      const allowedCharsRegex = new RegExp(`[^\\d${groupSeparator}${decimalSeparator}]`, 'g');
+      const multipleGroupSepRegex = new RegExp(`${groupSeparator}{2,}`, 'g');
+      
+      // Allow only digits and appropriate separators for the locale
+      input.value = input.value.replace(allowedCharsRegex, '');
+      // Remove multiple consecutive group separators
+      input.value = input.value.replace(multipleGroupSepRegex, groupSeparator);
+      
+      // Clean value for calculations (remove all non-digit characters)
+      const cleanValue = input.value.replace(/\D/g, '');
+      updateApprox(cleanValue);
+      
+      // Enable/disable speak button
+      document.getElementById('speakBtn').disabled = cleanValue.length === 0;
     }
 
     function updateApprox(val) {
       const n = parseInt(val);
       let approx = '';
       if (!isNaN(n)) {
-        approx = new Intl.NumberFormat('en-US', {
-          notation: "compact",
-          compactDisplay: "short"
-        }).format(n);
+        // Use getShortForm to ensure consistent formatting with the selected language
+        approx = getShortForm(n);
         approx = `Approx: ${approx}`;
       }
       document.getElementById('approxValue').innerText = approx;
     }
 
-    function convertNumber() {
-      const val = document.getElementById('numberInput').value;
-      const num = parseInt(val);
-      if (isNaN(num)) return;
-
+    // Fetch supported languages from API
+    async function fetchSupportedLanguages() {
+      try {
+        const response = await fetch('/api/languages');
+        if (!response.ok) {
+          throw new Error('Failed to fetch languages');
+        }
+        
+        const languages = await response.json();
+        const languageSelect = document.getElementById('languageSelect');
+        
+        // Clear loading option
+        languageSelect.innerHTML = '';
+        
+        // Add languages to dropdown
+        languages.forEach(lang => {
+          const option = document.createElement('option');
+          option.value = lang.code;
+          option.innerHTML = `${lang.flag} ${lang.name}`;
+          languageSelect.appendChild(option);
+        });
+        
+        // Set default language (English if available, otherwise first language)
+        const savedLanguage = localStorage.getItem('preferredLanguage');
+        if (savedLanguage && languages.some(lang => lang.code === savedLanguage)) {
+          languageSelect.value = savedLanguage;
+        } else if (languages.some(lang => lang.code === 'en')) {
+          languageSelect.value = 'en';
+        } else if (languages.length > 0) {
+          languageSelect.value = languages[0].code;
+        }
+        
+        // Enable speak button if input has value
+        const input = document.getElementById('numberInput');
+        document.getElementById('speakBtn').disabled = !input.value.trim();
+        
+      } catch (error) {
+        console.error('Error fetching languages:', error);
+        const languageSelect = document.getElementById('languageSelect');
+        languageSelect.innerHTML = '<option value="" disabled selected>Failed to load languages</option>';
+      }
+    }
+    
+    async function convertNumber() {
+      // Clean the input value by removing all non-digit characters
+      const val = document.getElementById('numberInput').value.replace(/\D/g, '');
+      const num = parseFloat(val);
+      if (isNaN(num)) {
+        alert('Please enter a valid number');
+        return;
+      }
+      
+      if (num > 999999999999999) {
+        alert('Number is too large (max 15 digits)');
+        return;
+      }
+      
       const outputContainer = document.getElementById('outputContainer');
       outputContainer.innerHTML = '';
-
-      const outputs = [
-        { label: 'Short Form', value: getShortForm(num) },
-        { label: 'English (Full)', value: toEnglishWords(num) },
-        { label: 'German', value: 'Kommt bald...' },
-        { label: 'Hindi', value: 'जल्द आ रहा है...' },
-        { label: 'Odia', value: 'ଶୀଘ୍ର ଆସୁଛି...' }
-      ];
-
-      outputs.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'output';
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip';
-        tooltip.innerText = 'Copied!';
-        div.innerHTML = `<span><strong>${item.label}:</strong> ${item.value}</span>`;
-        const btn = document.createElement('button');
-        btn.className = 'copy-btn';
-        btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/></svg>`;
-        btn.onclick = () => {
-          navigator.clipboard.writeText(item.value);
-          tooltip.style.display = 'block';
-          setTimeout(() => tooltip.style.display = 'none', 1500);
+      
+      // Get selected language
+      const languageSelect = document.getElementById('languageSelect');
+      const selectedLanguage = languageSelect.value;
+      
+      if (!selectedLanguage) {
+        alert('Please select a language');
+        return;
+      }
+      
+      // Save language preference
+      localStorage.setItem('preferredLanguage', selectedLanguage);
+      
+      try {
+        // Create short form output
+        const shortForm = { label: 'Short Form', value: getShortForm(num) };
+        
+        // Call API to convert number to words
+        const response = await fetch('/api/convert', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            number: num,
+            language: selectedLanguage
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to convert number');
+        }
+        
+        const data = await response.json();
+        const fullForm = { 
+          label: document.querySelector(`#languageSelect option[value="${selectedLanguage}"]`).textContent.trim(), 
+          value: data.words 
         };
-        div.appendChild(btn);
-        div.appendChild(tooltip);
-        outputContainer.appendChild(div);
-      });
+        
+        const outputs = [shortForm, fullForm];
+        
+        outputs.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'output';
+          const tooltip = document.createElement('div');
+          tooltip.className = 'tooltip';
+          tooltip.innerText = 'Copied!';
+          div.innerHTML = `<span><strong>${item.label}:</strong> ${item.value}</span>`;
+          const btn = document.createElement('button');
+          btn.className = 'copy-btn';
+          btn.setAttribute('aria-label', `Copy ${item.label} text`);
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/></svg>`;
+          btn.onclick = () => {
+            navigator.clipboard.writeText(item.value)
+              .then(() => {
+                tooltip.style.display = 'block';
+                setTimeout(() => tooltip.style.display = 'none', 1500);
+              })
+              .catch(err => {
+                console.error('Could not copy text: ', err);
+              });
+          };
+          div.appendChild(btn);
+          div.appendChild(tooltip);
+          outputContainer.appendChild(div);
+        });
+        
+        // Format the input with appropriate separators for the selected language
+        const locale = getLocaleForLanguage();
+        document.getElementById('numberInput').value = new Intl.NumberFormat(locale).format(num);
+      } catch (error) {
+        console.error('Error converting number:', error);
+        alert(error.message || 'Failed to convert number');
+      }
     }
 
     function clearAll() {
       document.getElementById('numberInput').value = '';
       document.getElementById('outputContainer').innerHTML = '';
       document.getElementById('approxValue').innerText = '';
+      document.getElementById('speakBtn').disabled = true;
     }
 
+    // Get the appropriate locale for the selected language
+    function getLocaleForLanguage() {
+      const languageSelect = document.getElementById('languageSelect');
+      const selectedLanguage = languageSelect.value;
+      
+      // Map language codes to Intl.NumberFormat locales
+      const localeMap = {
+        'en': 'en-US',
+        'es': 'es-ES',
+        'fr': 'fr-FR',
+        'de': 'de-DE',
+        'it': 'it-IT',
+        'pt': 'pt-PT',
+        'ru': 'ru-RU',
+        'ja': 'ja-JP',
+        'nl': 'nl-NL',
+        'ar': 'ar-SA',
+        'cs': 'cs-CZ',
+        'pl': 'pl-PL',
+        'tr': 'tr-TR',
+        'ko': 'ko-KR',
+        'he': 'he-IL',
+        'id': 'id-ID',
+        'uk': 'uk-UA',
+        'vi': 'vi-VN',
+        'lt': 'lt-LT',
+        'lv': 'lv-LV',
+        'ro': 'ro-RO',
+        'sl': 'sl-SI',
+        'sr': 'sr-RS',
+        'sv': 'sv-SE',
+        'no': 'nb-NO',
+        'da': 'da-DK',
+        'fi': 'fi-FI',
+        'hu': 'hu-HU',
+        'az': 'az-AZ',
+        'be': 'be-BY',
+        'bn': 'bn-BD',
+        'ca': 'ca-ES',
+        'cy': 'cy-GB',
+        'fa': 'fa-IR',
+        'is': 'is-IS',
+        'kn': 'kn-IN',
+        'sk': 'sk-SK',
+        'te': 'te-IN',
+        'th': 'th-TH',
+        'am': 'am-ET',
+      };
+      
+      // Use the appropriate locale based on selected language, fallback to en-US
+      return localeMap[selectedLanguage] || 'en-US';
+    }
+    
     function getShortForm(n) {
-      return new Intl.NumberFormat('en-US', {
+      const locale = getLocaleForLanguage();
+      
+      return new Intl.NumberFormat(locale, {
         notation: "compact",
         compactDisplay: "short"
       }).format(n);
     }
 
-    function toEnglishWords(num) {
-      const a = ["","one","two","three","four","five","six","seven","eight","nine","ten",
-        "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
-      const b = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
-
-      if (num === 0) return 'zero';
-
-      const convert = (n) => {
-        if (n < 20) return a[n];
-        if (n < 100) return b[Math.floor(n/10)] + (n%10 ? "-" + a[n%10] : "");
-        if (n < 1000) return a[Math.floor(n/100)] + " hundred" + (n%100 ? " " + convert(n%100) : "");
-        if (n < 1e6) return convert(Math.floor(n/1000)) + " thousand" + (n%1000 ? " " + convert(n%1000) : "");
-        if (n < 1e9) return convert(Math.floor(n/1e6)) + " million" + (n%1e6 ? " " + convert(n%1e6) : "");
-        return convert(Math.floor(n/1e9)) + " billion" + (n%1e9 ? " " + convert(n%1e9) : "");
-      };
-
-      return convert(num).replace(/\b\w/g, c => c.toUpperCase());
+    // Client-side conversion functions have been removed as they are now handled by the backend API
+    
+    async function speakText() {
+      if (!('speechSynthesis' in window)) {
+        alert('Speech synthesis is not supported in your browser');
+        return;
+      }
+      
+      // Clean the input value by removing all non-digit characters
+      const val = document.getElementById('numberInput').value.replace(/\D/g, '');
+      const num = parseFloat(val);
+      if (isNaN(num)) {
+        alert('Please enter a valid number');
+        return;
+      }
+      
+      // Get selected language
+      const languageSelect = document.getElementById('languageSelect');
+      const selectedLanguage = languageSelect.value;
+      
+      if (!selectedLanguage) {
+        alert('Please select a language');
+        return;
+      }
+      
+      try {
+        // Call API to convert number to words
+        const response = await fetch('/api/convert', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            number: num,
+            language: selectedLanguage
+          })
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to convert number');
+        }
+        
+        const data = await response.json();
+        const textToSpeak = data.words;
+        
+        // Use the locale for speech synthesis
+        const locale = getLocaleForLanguage();
+        
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = locale;
+        window.speechSynthesis.speak(utterance);
+      } catch (error) {
+        console.error('Error speaking text:', error);
+        alert(error.message || 'Failed to speak text');
+      }
     }
   </script>
 </body>
